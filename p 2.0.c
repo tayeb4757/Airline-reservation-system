@@ -7,14 +7,13 @@
 
 #define MAX_SEATS 15
 
-// Structure for reservation
 struct airline
 {
     char passport[10];
     char name[30];
     char destination[30];
     char flight_name[20];
-    char reservation_time[20]; // now just stores date
+    char reservation_time[20]; 
     int seat_num;
     char seat_prefix;
     char email[40];
@@ -23,7 +22,7 @@ struct airline
 
 struct airline *begin = NULL;
 
-// Structure for tracking flights
+
 struct flight_tracker
 {
     char destination[30];
@@ -35,7 +34,7 @@ struct flight_tracker
 
 struct flight_tracker *flight_begin = NULL;
 
-// Utility functions
+
 void clearScreen() { system("cls"); }
 void pauseScreen() { printf("\n\tPress any key to continue..."); getch(); }
 
@@ -46,7 +45,7 @@ void printHeader(const char *title)
     printf("============================================================\n");
 }
 
-// Get flight tracker
+
 struct flight_tracker* get_flight_tracker(char *destination)
 {
     struct flight_tracker *temp = flight_begin;
@@ -73,7 +72,7 @@ struct flight_tracker* get_flight_tracker(char *destination)
     return new_tracker;
 }
 
-// Get reservation details
+
 void get_details(struct airline *p)
 {
     printf("\nEnter Passport Number (max 9 chars): ");
@@ -104,7 +103,7 @@ void get_details(struct airline *p)
     p->reservation_time[strcspn(p->reservation_time, "\n")] = 0;
 }
 
-// Reserve a seat
+
 void reserve()
 {
     struct airline *new_node = (struct airline *)malloc(sizeof(struct airline));
@@ -133,7 +132,7 @@ void reserve()
     printf("\nReservation Date : %s\n", new_node->reservation_time);
 }
 
-// Display all bookings
+
 void display()
 {
     if (!begin)
@@ -157,7 +156,7 @@ void display()
     }
 }
 
-// View individual record
+
 void view_individual()
 {
     if (!begin)
@@ -192,7 +191,7 @@ void view_individual()
     printf("\nNo record found for passport number: %s\n", passport_input);
 }
 
-// Cancel reservation
+
 void cancel()
 {
     if (!begin)
@@ -226,7 +225,6 @@ void cancel()
     printf("\nPassport number not found!\n");
 }
 
-// Save records to file
 void savefile()
 {
     FILE *fp = fopen("air_records.txt", "w");
@@ -253,7 +251,7 @@ void savefile()
     fclose(fp);
 }
 
-// Load records from file
+
 void loadfile()
 {
     FILE *fp = fopen("air_records.txt", "r");
@@ -293,7 +291,7 @@ void loadfile()
     fclose(fp);
 }
 
-// Main program
+
 int main()
 {
     loadfile(); // <-- Load existing reservations
@@ -348,3 +346,4 @@ int main()
 
     return 0;
 }
+
